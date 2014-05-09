@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gear reference</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/javascript.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="javascripts/rainbow.min.js"></script>
+    <script src="javascripts/generic.js"></script>
+    <script src="javascripts/javascript.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Gear Reference</h1>
+        <p class="header">Gear.js - Build System for Node.js and the Browser</p>
+
+        <ul class="external">
+          <li><a class="buttons github" href="https://github.com/fpirsch/gear/tree/gh-pages">This doc project</a></li>
+          <li class="hidden-xs"><a class="buttons download" href="https://github.com/fpirsch/gear/archive/gh-pages.zip">Download as ZIP</a></li>
+          <li><a class="buttons github" href="https://github.com/yahoo/gear">The Gear project</a></li>
+          <li><a class="buttons github" href="https://github.com/yahoo/gear-lib">The Gear-lib project</a></li>
+        </ul>
+
+		<ul class="internal">
+			<li><a href=".">Getting started</a></li>
+			<li><a href="core-tasks">Core tasks</a></li>
+			<li><a href="gear-lib-tasks">Gear-lib tasks</a></li>
+		</ul>
+
+        <p class="header hidden-sm">This doc is maintained by <a class="header name" href="https://github.com/fpirsch">fpirsch</a></p>
+      </header>
+
+	  <section>
+		<p class="big">
+        Gear.js is a powerful build system with a clear and elegant syntax based on task chaining. Concatenate, lint and minify
+		your stylesheets and javascripts, add version and licence information, fill in templates, all in a few lines of code.
+		</p>
+
+		<h3>Getting Started</h3>
+		<p>Gear.js can be installed via <a href="https://www.npmjs.org/"><code>npm</code></a>, either locally or globally.</p>
+
+		<code class="block">&gt; npm install gear gear-lib</code>
+		or
+		<code class="block">&gt; npm install -g gear gear-lib</code>
+
+		<h3>The Gearfile</h3>
+		<p>The <code>Gearfile</code> is a valid javascript file containing the building instructions and placed at the root of your project.</p>
+		<div class="row">
+			<div class="col-2">
+				<p>In command line mode, just type :</p>
+				<code class="block p">&gt; gear</code>
+				<p>and gear looks for the <code>Gearfile</code> in the current directory and executes it.</p>
+			</div>
+			<div class="col-2">
+				<code>Gearfile</code> example :
+				<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+        .read('src/myproject.js')
+        .jsminify()
+        .write('build/myproject.min.js')
+        .log('Done !')
+        .run();</code>
+			</div>
+		</div>
+
+		<h3>Queues and Blobs</h3>
+		Gear uses Queues to manipulate Blobs :
+		<dl>
+			<dt>Queue</dt>
+			<dd>
+				A sequence of tasks defining and manipulating a list of Blobs.<br>
+				Tasks in a Queue are executed in series, and multiple Queues in a Gearfile are executed in parallel.<br>
+				The basic tasks are : reading and writing files, concatenation, string/regex replacement, appending and prepending data, writing messages to the console.<br>
+				→ <a href="core-tasks">core tasks</a><br>
+				<code>gear-lib</code> adds more complex tasks : jslint, jshint, uglify.js, less, csslint, handlebars, glob files, s3 deploy.<br>
+				→ <a href="gear-lib-tasks">gear-lib tasks</a><br>
+			</dd>
+			<dt>Blob</dt>
+			<dd>
+			Basically, a <span class="keyword">String</span> with a name.<br>
+			<!-- result n'est plus private, c'est une erreur dans la doc -->
+			A Blob is an immutable data object loosely based on the W3C Blob, with a property bag as well as a <span class="property">result</span> property.<br>
+			Blobs can be merged with other blobs. When merging, properties in the property bag are merged, while <span class="property">result</span> is concatenated.<br>
+			The <span class="property">result</span> property can be a <span class="keyword">Buffer</span> or a <span class="keyword">String</span>.<br>
+			</dd>
+		</dl>
+      </section>
+
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a><br>Based on the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>

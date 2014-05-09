@@ -1,0 +1,76 @@
+/**
+ * Inspired from GitHub theme
+ * https://github.com/ccampbell/rainbow
+ *
+ * Some nispiration from Adobe Brackets.
+ * Brackets/www/styles/brackets.min.css
+ */
+
+code[data-language="javascript"] .comment {
+    color: #998;
+}
+
+code[data-language="javascript"] .support {
+    color: #0086B3;
+}
+
+code[data-language="javascript"] .tag,
+code[data-language="javascript"] .tag-name {
+    color: navy;
+}
+
+.property {	/* added - not only visible in code[data-language="javascript"] */
+	color: #8757ad;
+}
+
+.keyword,		/* not only in code[data-language="javascript"] */
+code[data-language="javascript"] .css-property,
+code[data-language="javascript"] .vendor-prefix,
+code[data-language="javascript"] .sass,
+code[data-language="javascript"] .class,
+code[data-language="javascript"] .id,
+code[data-language="javascript"] .css-value,
+code[data-language="javascript"] .entity.function,
+code[data-language="javascript"] .storage.function {
+    font-weight: bold;
+}
+
+code[data-language="javascript"] .css-property,
+code[data-language="javascript"] .css-value,
+code[data-language="javascript"] .vendor-prefix,
+code[data-language="javascript"] .support.namespace {
+    color: #333;
+}
+
+code[data-language="javascript"] .constant.numeric,
+code[data-language="javascript"] .keyword.unit,
+code[data-language="javascript"] .hex-color {
+    font-weight: normal;
+    color: #099;
+}
+
+code[data-language="javascript"] .entity.class {
+    color: #458;
+}
+
+code[data-language="javascript"] .entity.id,
+code[data-language="javascript"] .function.call,
+code[data-language="javascript"] .entity.function {
+    color: #900;
+}
+
+code[data-language="javascript"] .attribute,
+code[data-language="javascript"] .variable {
+    color: teal;
+}
+
+code[data-language="javascript"] .string,
+code[data-language="javascript"] .support.value  {
+    font-weight: normal;
+    /*color: #d14;*//* github version */
+	color: #f18900;	/* brackets version */
+}
+
+code[data-language="javascript"] .regexp {
+    color: #009926;
+}

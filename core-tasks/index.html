@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gear reference</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="../stylesheets/javascript.css">
+    <script src="../javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="../javascripts/rainbow.min.js"></script>
+    <script src="../javascripts/generic.js"></script>
+    <script src="../javascripts/javascript.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Gear Reference</h1>
+        <p class="header">Gear.js - Build System for Node.js and the Browser</p>
+
+        <ul class="external">
+          <li><a class="buttons github" href="https://github.com/fpirsch/gear/tree/gh-pages">This doc project</a></li>
+          <li class="hidden-xs"><a class="buttons download" href="https://github.com/fpirsch/gear/archive/gh-pages.zip">Download as ZIP</a></li>
+          <li><a class="buttons github" href="https://github.com/yahoo/gear">The Gear project</a></li>
+          <li><a class="buttons github" href="https://github.com/yahoo/gear-lib">The Gear-lib project</a></li>
+        </ul>
+
+		<ul class="internal">
+			<li><a href="..">Getting started</a></li>
+			<li><a href="../core-tasks">Core tasks</a></li>
+			<li><a href="../gear-lib-tasks">Gear-lib tasks</a></li>
+		</ul>
+
+        <p class="header hidden-sm">This doc is maintained by <a class="header name" href="https://github.com/fpirsch">fpirsch</a></p>
+      </header>
+
+	  <section>
+		<p>Gear.js provides the workflow and a set of basic <span class="keyword">Queue</span> tasks.</p>
+
+
+
+		<h3>Queue initialization</h3>
+		<code class="block p" data-language="javascript">new gear.Queue()   // Start with an empty list of Blobs
+        ...        // Chain some task declarations
+        .run();    // Starts the execution of the tasks</code>
+
+		<p>
+			The Queue is generally created with <a href="../gear-lib-tasks">the optional gear-lib registry of tasks</a>. However this page only shows
+			the tasks available in the most basic Queue.
+		</p>
+		<p>
+			Optionally, the Queue can be created with a custom logger : see <a href="#log()">log()</a> and <a href="#inspect()">inspect()</a>.
+			A custom logger is an object with a <span class="property">log</span> method.
+		</p>
+
+		<code class="block p" data-language="javascript">new gear.Queue({ logger: { log: function(object) {
+            // do something
+        }})
+        // chain tasks</code>
+
+		<h3>Core tasks in alphabetical order</h3>
+		
+		<ul class="four-col">
+			<li><a href="#append()">append</a></li>
+			<li><a href="#concat()">concat</a></li>
+			<li><a href="#get()">get</a></li>
+			<li><a href="#inspect()">inspect</a></li>
+			<li><a href="#load()">load</a></li>
+			<li><a href="#log()">log</a></li>
+			<!--<li><a href="#noop()">noop</a></li>-->
+			<li><a href="#prepend()">prepend</a></li>
+			<li><a href="#read()">read</a></li>
+			<li><a href="#readBefore()">readBefore</a></li>
+			<li><a href="#replace()">replace</a></li>
+			<li><a href="#replace()">run</a></li>
+			<li><a href="#stamp()">stamp</a></li>
+			<li><a href="#tasks()">tasks</a></li>
+			<li><a href="#test()">test</a></li>
+			<li><a href="#write()">write</a></li>
+		</ul>
+<!--
+[ 'concat : undefined',
+  'load : undefined',
+  'append : undefined',
+  'prepend : prepend',
+  'test : each',
+  'get : collect',
+  'log : collect',
+  'inspect : collect',
+  'noop : undefined',
+  'read : undefined',
+  'readBefore : prepend',
+  'replace : undefined',
+  'stamp : undefined',
+  'tasks : collect',
+  'write : slice' ]
+-->
+		<h4 id="append()" class="first code">.append(string)</h4>
+		<p>
+			Appends a new blob string at the end of the list.<br>
+			Alias of the load() method.
+		</p>
+
+
+		<h4 id="concat()" class="code">.concat([options])</h4>
+		Concatenates the whole list of blobs into a single new Blob.<br>
+		<span class="property">options</span> is an optional object with the following property :
+		<dl class="arguments">
+			<dt>callback</dt>
+			<dd>Function to execute on each blob in the list. Return a string which replaces the blob.</dd>
+		</dl>
+
+		<h4 id="get()" class="code">.get(index)</h4>
+		<p>Keeps only the blob at the given index in the list. The other blobs are discarded.</p>
+
+		<h4 id="inspect()" class="code">.inspect()</h4>
+		<p>
+			Displays the complete liste of blobs, with their properties and content, to the console,
+			or to the custom queue logger.
+		</p>
+
+		<h4 id="log()" class="code">.log(string)</h4>
+		<p>Displays a message to the console, or to the custom queue logger.</p>
+
+		<h4 id="load()" class="code">.load(string)</h4>
+		<p>Alias of the <a href="#append()">append()</a> method.</p>
+
+		<!--
+		<h4 id="noop()" class="code">.noop()</h4>
+		<p>Does nothing</p>
+		-->
+
+		<h4 id="prepend()" class="code">.prepend(string)</h4>
+		<p>Prepends a new blob string at the beginning of the list.</p>
+
+		<h4 id="read()" class="code">.read(name)<br>.read(&lt;array of names&gt;)</h4>
+		<p>Reads one or more files and appends their content to the blob list.<br>
+		<span class="property">name</span> is the file path, relative to the Gearfile.<br>
+		A new blob is created for each file, with its <span class="property">name</span> property set to the file name.<br>
+		</p>
+		Optionally, each file can be given as an object with the following properties :
+		<dl class="arguments">
+			<dt>name</dt><dd>name or relative path</dd>
+			<dt>encoding</dt><dd>'utf8' (default), 'ascii', or 'base64'</dd>
+			<dt>sync</dt><dd>boolean</dd>
+		</dl>
+
+		<h4 id="readBefore()" class="code">.readBefore(name)<br>.readBefore(&lt;array of names&gt;)</h4>
+		<p>Same as <a href="#read()">read()</a> but the file blobs are added at the beginning of the blob list.</p>
+
+		<h4 id="replace()" class="code">.replace(options)</h4>
+		Executes a search-and-replace on each blob in the list.<br>
+		<span class="property">options</span> is an object or an array of objects with the following properties :
+		<dl class="arguments">
+			<dt>regex</dt><dd>The string or <span class="keyword">RegExp</span> object to search.</dd>
+			<dt>flags</dt><dd>If <span class="property">regex</span> is a string, any combination of the strings 'g', 'i', 'm', 'y'
+			(see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">the&nbsp;RegExp&nbsp;documentation&nbsp;on&nbsp;MDN</a>).
+			The default value is 'mg'.</dd>
+			<dt>replace</dt><dd>The replacement string, or a callback function to be invoked to create the replacement string
+			(see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter">the&nbsp;String.replace()&nbsp;documentation&nbsp;on&nbsp;MDN</a>).</dd>
+		</dl>
+		<p>
+			If <span class="property">options</span> is an array of such objects, each replacement is executed on each blob. This allows multiple search-and-replace operations
+			in a single statement.
+		</p>
+
+		<h4 id="run()" class="code">.run([callback])</h4>
+		Not a task, but an essential part of the process, since it launches the execution of the task queue. Each task is executed after the previous one is finished.
+		If a callback function is given, it is invoked after the task queue is complete, with the following arguments :
+		<dl class="arguments">
+			<dt>err</dt><dd>The error object or <span class="keyword">null</span> if everything was OK.</dd>
+			<dt>res</dt><dd>The final array of <span class="keyword">Blob</span>s.</dd>
+		</dl>
+
+		<h4 id="stamp()" class="code">.stamp(options)</h4>
+		Adds a prefix or a suffix to each blob. This task does not create or remove any blob, it just modifies the existing ones.<br>
+		<span class="property">options</span> is an object with the following properties :
+		<dl class="arguments">
+			<dt>prefix</dt><dd>(optional) The string to be prepended to each <span class="keyword">Blob</span>.</dd>
+			<dt>postfix</dt><dd>(optional) The string to be appended to each <span class="keyword">Blob</span>.</dd>
+		</dl>
+
+		<h4 id="tasks()" class="code">.tasks(workflow)</h4>
+		<p>
+			Executes a complex workflow. Determines the best order for running the subtasks, based on their requirements.
+			Each subtask can optionally depend on other subtasks being completed first, and each subtask is run as soon as its requirements are satisfied.<br>
+			See <a href="https://github.com/caolan/async/#auto">async.auto</a> .
+		</p>
+		Each property key of the <span class="property">workflow</span> object is the name of a subtask.
+		The corresponding property value is an object with the following properties :
+		<dl class="arguments">
+			<dt>requires</dt>
+			<dd>
+				(optional) The requirement for this subtask to begin. Can be either the name of a single subtask,
+				or an array of subtask names.
+			</dd>
+			<dt>task</dt>
+			<dd>
+				The <span class="keyword">Queue</span> task to execute. For simple tasks like <a href="#concat()">concat()</a>,
+				the name is sufficient. If the task has parameters, this is an array with the task name and parameters.
+			</dd>
+		</dl>
+		
+		<code class="block p" data-language="javascript">new Queue()
+   .read('foo.js')
+   .log('Parallel Tasks')
+   .tasks({
+       read:     {task: ['read', ['foo.js', 'bar.js', 'baz.js']]},
+       combine:  {requires: 'read', task: 'concat'},
+       print:    {requires: 'combine', task: 'inspect'}, // Runs when read and combine complete
+       parallel: {task: ['log', "Hello Gear.js world!"]} // Run parallel to read
+   })
+   .run();</code>
+
+		<h4 id="test()" class="code">.test(options)</h4>
+		Applies a callback to each <span class="keyword">Blob</span>, and abort the <span class="keyword">Queue</span> if the callback returns a non-null value.<br>
+		Note, that since this task applies the callback to each blob item in parallel, there is no guarantee that the callbacks will complete in order
+		(see <a href="https://github.com/caolan/async/#each">async.each</a>).<br>
+		<span class="property">options</span> is an object with the following property :
+		<dl class="arguments">
+			<dt>callback</dt>
+			<dd>
+				A function to be invoked with each blob. If the return value is not <span class="keyword">null</span>,
+				the Queue stops and the an error object reflects this value.
+			</dd>
+		</dl>
+
+		<h4 id="write()" class="code">.write(name)<br>.write(&lt;array of names&gt;)</h4>
+		<p>Writes blobs to disk.<br>
+		<span class="property">name</span> is the file path, relative to the Gearfile. Each blob is written in a separate file.<br>
+		</p>
+		Optionally, each file can be given as an object with the following properties :
+		<dl class="arguments">
+			<dt>name</dt><dd>name or relative path</dd>
+			<dt>encoding</dt><dd>'utf8' (default), 'ascii', or 'base64'</dd>
+		</dl>
+
+		<code class="block p" data-language="javascript">new Queue()
+    .read(['foo.js', {name: 'bar.js'}, 'baz.js'])
+    .write(['newfoo.js', 'newbar.js'])    // Not writing 'baz.js'
+    .run();</code>
+	  </section>
+
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a><br>Based on the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+	<script src="../javascripts/dom.js"></script>
+  </body>
+</html>
