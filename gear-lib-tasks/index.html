@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gear reference</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="../stylesheets/javascript.css">
+    <script src="../javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="../javascripts/rainbow.min.js"></script>
+    <script src="../javascripts/generic.js"></script>
+    <script src="../javascripts/javascript.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Gear Reference</h1>
+        <p class="header">Gear.js - Build System for Node.js and the Browser</p>
+
+        <ul class="external">
+          <li><a class="buttons github" href="https://github.com/fpirsch/gear-reference">This doc project</a></li>
+          <li class="hidden-xs"><a class="buttons download" href="https://github.com/fpirsch/gear-reference/archive/gh-pages.zip">Download as ZIP</a></li>
+          <li><a class="buttons github" href="https://github.com/yahoo/gear">The Gear project</a></li>
+          <li><a class="buttons github" href="https://github.com/yahoo/gear-lib">The Gear-lib project</a></li>
+        </ul>
+
+		<ul class="internal">
+			<li><a href="..">Getting started</a></li>
+			<li><a href="../core-tasks">Core tasks</a></li>
+			<li><a href="../gear-lib-tasks">Gear-lib tasks</a></li>
+		</ul>
+
+        <p class="header hidden-sm">This doc is maintained by <a class="header name" href="https://github.com/fpirsch">fpirsch</a></p>
+      </header>
+
+	  <section>
+		<p>The core set of tasks can be extended with the help of a task registry.
+		The Gear-lib registry provides a set of advanced <span class="keyword">Queue</span> tasks based on commonly used external dependencies.</p>
+
+
+		<h3>Queue initialization</h3>
+		<code class="block p" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+        ...        // Chain some task declarations
+        .run();    // Starts the execution of the tasks</code>
+
+		<h3>Gear-lib tasks in alphabetical order</h3>
+		
+		<ul class="four-col">
+			<li><a href="#csslint()">csslint</a></li>
+			<li><a href="#cssminify()">cssminify</a></li>
+			<li><a href="#glob()">glob</a></li>
+			<li><a href="#handlebars()">handlebars</a></li>
+			<li><a href="#jshint()">jshint</a></li>
+			<li><a href="#jslint()">jslint</a></li>
+			<li><a href="#jsminify()">jsminify</a></li>
+			<li><a href="#less()">less</a></li>
+			<li><a href="#s3()">s3</a></li>
+		</ul>
+
+		<h4 id="csslint()" class="first code">.csslint(options)</h4>
+		Lints your CSS code with <a href="http://csslint.net/">CSS Lint</a>.<br>
+		<span class="property">options</span> is an object with the following properties :
+		<dl class="arguments">
+			<dt>config</dt>
+			<dd>
+				Configuration object for CSS Lint. List of rules to apply.
+				By default, all rules are used. If a rule has a value of 1 then it's a warning,
+				a value of 2 means it's an error. See <a href="https://github.com/CSSLint/csslint/wiki/Rules">CSSLint rules</a>.
+			</dd>
+			<dt>callback</dt>
+			<dd>
+				This function is called with the results of the linting wrapped in the
+				<span class="property">csslint</span> property of the argument.
+			</dd>
+		</dl>
+		<p>TODO more details (config, callback, error reporting, multiple blobs)</p>
+
+		<h4 id="cssminify()" class="code">.cssminify([options])</h4>
+		Alias of the <a href="#less()">less()</a> task.
+
+  		<h4 id="less()" class="code">.less(options)</h4>
+		Compiles and minifies <a href="http://lesscss.org/">Less</a> style sheets.
+		<p>TODO more details (config, error reporting, multiple blobs)</p>
+
+	  </section>
+
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a><br>Based on the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+	<script src="../javascripts/dom.js"></script>
+  </body>
+</html>
