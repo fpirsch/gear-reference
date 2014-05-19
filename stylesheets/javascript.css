@@ -64,6 +64,7 @@ code[data-language="javascript"] .variable {
     color: teal;
 }
 
+.code.string,	/* added */
 code[data-language="javascript"] .string,
 code[data-language="javascript"] .support.value  {
     font-weight: normal;
