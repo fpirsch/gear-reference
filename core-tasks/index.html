@@ -206,7 +206,7 @@
 			</dd>
 		</dl>
 		
-		<code class="block p" data-language="javascript">new Queue()
+		<code class="block p" data-language="javascript">new gear.Queue()
    .read('foo.js')
    .log('Parallel Tasks')
    .tasks({
@@ -240,7 +240,7 @@
 			<dt>encoding</dt><dd>'utf8' (default), 'ascii', or 'base64'</dd>
 		</dl>
 
-		<code class="block p" data-language="javascript">new Queue()
+		<code class="block p" data-language="javascript">new gear.Queue()
     .read(['foo.js', {name: 'bar.js'}, 'baz.js'])
     .write(['newfoo.js', 'newbar.js'])    // Not writing 'baz.js'
     .run();</code>
