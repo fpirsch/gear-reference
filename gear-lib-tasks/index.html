@@ -104,8 +104,38 @@
 		<h4 id="cssminify()" class="code">.cssminify([options])</h4>
 		Alias of the <a href="#less()">less()</a> task.
 
-  		<h4 id="glob()" class="code">.glob()</h4>
-  		<h4 id="handlebars()" class="code">.handlebars()</h4>
+		<h4 id="glob()" class="code">.glob(config)</h4>
+        Reads multiple files using name patterns like stars and stuff. See <a href="https://github.com/isaacs/node-glob">node-glob</a>.<br>
+		<span class="property">config</span> is an object with the following properties :
+		<dl class="arguments">
+			<dt>pattern</dt>
+			<dd>
+				A string describing the file names to match :<br>
+                <ul>
+                    <li><code>?</code> matches any single character except a <code>/</code>.</li>
+                    <li><code>*</code> matches 0 or more of any character except a <code>/</code>.</li>
+                    <li><code>**</code> matches any subfolder, if it is the only thing in a path part.</li>
+                    <li>Character classes : <code>[A-Fa-f0-9]</code> matches any single character from <code>A</code> to <code>F</code>
+                        or from <code>a</code> to <code>f</code> or from <code>0</code> to <code>9</code></li>
+                </ul>
+			</dd>
+			<dt>options</dt>
+			<dd>A map of <a href="https://github.com/isaacs/node-glob#options">options passed to Glob</a>.</dd>
+			<dt>encoding</dt>
+			<dd>Defaults to <span class="code string">'utf-8'</span>.</dd>
+		</dl>
+		<code class="block p" data-language="javascript">new Queue()
+    .glob({ pattern: '**/*.js' })    // reads recursively all javascript files
+    .run();</code>
+
+		<h4 id="handebars()" class="code">.handebars(variables)</h4>
+        Uses <a href="http://handlebarsjs.com/">handlebars</a> to fill your Blob templates with computed values.<br>
+		<span class="property">variables</span> is an object used to fill the template.
+		<code class="block" data-language="javascript">new Queue()
+    .read('myTemplate.html')
+    .handlebars({ date: Date.now(), version: '1.3.2' })
+    .run();</code>
+
   		<h4 id="jshint()" class="code">.jshint()</h4>
   		<h4 id="jslint()" class="code">.jslint()</h4>
   		<h4 id="jsminify()" class="code">.jsminify()</h4>
