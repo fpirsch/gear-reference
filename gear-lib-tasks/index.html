@@ -142,8 +142,9 @@
 			<span class="property">variables</span> is an object used to fill the template.
 		</p>
 		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
-    .read('myTemplate.html')
-    .handlebars({ date: Date.now(), version: '1.3.2' })
+    .append('Current date is {{ date }}, version number is {{ version }}')
+    .handlebars({ date: new Date().toISOString(), version: '1.3.2' })
+    .inspect()    // prints "Current date is 2014-05-19T18:44:11.891Z, version number is 1.3.2"
     .run();</code>
 
 		  
