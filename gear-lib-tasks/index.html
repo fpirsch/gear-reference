@@ -64,29 +64,65 @@
 		</ul>
 
 		<h4 id="csslint()" class="first code">.csslint(options)</h4>
-		Lints your CSS code with <a href="http://csslint.net/">CSS Lint</a>.<br>
+		<!--
+		Pas super bien documenté, mais on y arrive avec le page CSSLint Rules et
+		cssLint.getRuleSet() qui donne la liste complète.
+		-->
+		Lints your CSS code with <a href="http://csslint.net/">CSS Lint</a>. All blobs are linted.<br>
 		<span class="property">options</span> is an object with the following properties :
 		<dl class="arguments">
 			<dt>config</dt>
 			<dd>
-				Configuration object for CSS Lint. List of rules to apply.
+				Optional configuration object for CSS Lint. List of rules to apply.
 				By default, all rules are used. If a rule has a value of 1 then it's a warning,
-				a value of 2 means it's an error. See <a href="https://github.com/CSSLint/csslint/wiki/Rules">CSSLint rules</a>.
+				a value of 2 means it's an error.<br>
+				Example : <code data-language="javascript">{ "adjoining-classes": 1, "box-model": 1 }</code><br>
+				See <a href="https://github.com/CSSLint/csslint/wiki/Rules">CSSLint rules</a>.
 			</dd>
 			<dt>callback</dt>
 			<dd>
-				This function is called with the results of the linting wrapped in the
-				<span class="property">csslint</span> property of the argument.
+				Don't forget to give this callback, or your CSSLint error report will be discarded.<br>
+				If CSSLint doesn't find any errors in your CSS, an empty object <code>{}</code> will be passed to this function.<br>
+				If there are errors, the argument object will contain them as an array in the <span class="property">csslint</span> property 
+				<span class="property">csslint</span> property of the argument.<br>
+				The return value determines if the Queue aborts or continues.
 			</dd>
 		</dl>
-		<p>TODO more details (config, callback, error reporting, multiple blobs)</p>
+		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+        .read('styles.css')
+        .csslint({ callback: function(linted) {
+            if (linted.csslint) {
+                // linted.csslint is the list of error descriptions.
+                console.log(linted.csslint);
+                // Return truthy value to abort the Queue.
+                return 'CSS has ' + linted.csslint.length + ' errors';
+            }
+            // No errors
+        })
+        .run();</code>
 
 		<h4 id="cssminify()" class="code">.cssminify([options])</h4>
 		Alias of the <a href="#less()">less()</a> task.
 
-  		<h4 id="less()" class="code">.less(options)</h4>
-		Compiles and minifies <a href="http://lesscss.org/">Less</a> style sheets.
-		<p>TODO more details (config, error reporting, multiple blobs)</p>
+  		<h4 id="glob()" class="code">.glob()</h4>
+  		<h4 id="handlebars()" class="code">.handlebars()</h4>
+  		<h4 id="jshint()" class="code">.jshint()</h4>
+  		<h4 id="jslint()" class="code">.jslint()</h4>
+  		<h4 id="jsminify()" class="code">.jsminify()</h4>
+
+		<h4 id="less()" class="code">.less([options])</h4>
+		<!--
+		Flou total pour les options. À part 'compress', faut chercher dans le code pour les avoir.
+		Y en a ici : http://lesscss.org/usage/ mais c'est pour la ligne de commande, c'est pas les mêmes noms en JS.
+		Sinon faut regarder dans le code, y en a plein less\dist\lessc-rhino-1.7.0.js, lignes 200 à 350.
+		Mais on sait pas à quoi elles s'appliquent (parser, renderer etc).
+		-->
+		Compiles and minifies <a href="http://lesscss.org/">Less</a> style sheets. All blobs are compiled.<br>
+		<span class="property">options</span> is an optional configuration object.
+		Example <code data-language="javascript">{ compress: false }</code><br>
+		If an error is found, the Queue stops and the error is displayed.
+
+  		<h4 id="s3()" class="code">.s3()</h4>
 
 	  </section>
 
