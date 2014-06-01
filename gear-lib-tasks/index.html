@@ -135,9 +135,10 @@
 		  
 		  
 		<h4 id="handebars()" class="code">.handebars(variables)</h4>
-        <p>
-		  Uses <a href="http://handlebarsjs.com/">the handlebars template engine</a> to fill your Blob templates with computed values.<br>
-			<span class="property">variables</span> is an object used to fill the template.
+		<p>
+			Uses <a href="http://handlebarsjs.com/">the handlebars template engine</a> to fill your templates with computed values.<br>
+			Each Blob in the list is considered a template to fill.<br>
+			<span class="property">variables</span> is an object used to fill the templates.
 		</p>
 		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
     .append('Current date is {{ date }}, version number is {{ version }}')
@@ -147,13 +148,58 @@
 
 		  
 		  
-  		<h4 id="jshint()" class="code">.jshint()</h4>
+  		<h4 id="jshint()" class="code">.jshint([options])</h4>
+        <p>
+			Checks your javascript files with <a href="http://jshint.com">JSHint</a>. If errors are found, they are displayed on the console and
+			the Queue stops.<br>
+			<span class="property">options</span> is an optional object with the following properties :
+		</p>
+		<dl class="arguments">
+			<dt>configFile</dt>
+			<dd>path to a JSHint configuration file, such as <code>.jshintrc</code></dd>
+			<dt>config</dt>
+			<dd>A custom JSHint configuration object. See <a href="http://jshint.com/docs/">the JSHint doc</a>, and
+				<a href="http://jshint.com/docs/options/">all JSHint options</a>.</dd>
+			<dt>callback</dt>
+			<dd>A function to be called with the linting error object. Can return non-null to end the Queue.</dd>
+		</dl>
+		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+    .read('src/app.js')
+    .jshint()                               // default behavior
+    .jshint({ configfile: '.jshintrc' })    // with the project's config
+    .jshint({ config: { eqeqeq: true } })   // with some custom config
+    .run();</code>
 		  
 		  
 		  
-  		<h4 id="jslint()" class="code">.jslint()</h4>
-		  
-		  
+  		<h4 id="jslint()" class="code">.jslint(config)</h4>
+        <p>
+			Checks your javascript files with <a href="http://jslint.com">JSLint</a>. Errors are passed to a callback.
+			<span class="property">config</span> is a mandatory object with the following properties :
+		</p>
+		<dl class="arguments">
+			<dt>config</dt>
+			<dd>An optional custom JSLint configuration object. See <a href="http://www.jslint.com/lint.html#options">the JSLint doc</a>.</dd>
+			<dt>callback</dt>
+			<dd>
+				A function to be called with the linting error object. Can return non-null to end the Queue.
+				If this callback is not given, all linting messages will be silently ignored.
+			</dd>
+		</dl>
+		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+    .read('src/app.js')
+    .jslint({
+        config: { bitwise: true },
+        callback: function(err) {
+            if(err.jslint) {
+                console.log('The following errors were detected by jslint:');
+                return err.jslint;       // returning non-null stops the Queue and displays the error object.
+            }
+        }
+    })
+    .run();</code>
+
+
 		  
   		<h4 id="jsminify()" class="code">.jsminify()</h4>
 
