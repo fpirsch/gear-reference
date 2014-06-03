@@ -201,9 +201,42 @@
 
 
 		  
-  		<h4 id="jsminify()" class="code">.jsminify()</h4>
+  		<h4 id="jsminify()" class="code">.jsminify([options])</h4>
+		<p>
+			Uses <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a> to compress/minify/mangle your JS code.
+			All Blobs in the list are minified.<br>
+			<span class="property">options</span> is an object with the following properties :
+		</p>
+		<dl class="arguments">
+			<dt>config</dt>
+			<dd>
+				An optional custom configuration object. See <a href="https://github.com/mishoo/UglifyJS2#the-simple-way">the UglifyJS doc</a>.
+				By default, comments containing licence information are preserved. To remove all comments, set
+				<code>config.output.comments</code> to <code>false</code>.
+			</dd>
+			<dt>callback</dt>
+			<dd>If an error occurs during minification, this optional function is called with the error object.</dd>
+		</dl>
+		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+    .read('src/app.js')
+    .jsminify({
+        config: {
+            mangle: false,
+            output: {
+                ascii_only: true,
+                comments: false
+            },
+            compress: {
+                unsafe: true,
+                global_defs: {
+                    DEBUG: false
+                }
+            }
+        }
+    })
+    .run();</code>
 
-		  
+
 		  
 		<h4 id="less()" class="code">.less([options])</h4>
 		<!--
