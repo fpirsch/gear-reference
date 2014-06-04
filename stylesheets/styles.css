@@ -51,6 +51,10 @@ p, ul, ol, table, dl, code.p {
 	margin:0 0 22px;
 }
 
+dd ul {
+	margin: 0;
+}
+
 p {
     text-align: justify;
 }

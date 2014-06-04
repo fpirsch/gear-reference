@@ -120,7 +120,8 @@
                     <li><code>*</code> matches 0 or more of any character except a <code>/</code>.</li>
                     <li><code>**</code> matches any subfolder, if it is the only thing in a path part.</li>
                     <li>Character classes : <code>[A-Fa-f0-9]</code> matches any single character from <code>A</code> to <code>F</code>
-                        or from <code>a</code> to <code>f</code> or from <code>0</code> to <code>9</code></li>
+                        or from <code>a</code> to <code>f</code> or from <code>0</code> to <code>9</code>
+					</li>
                 </ul>
 			</dd>
 			<dt>options</dt>
@@ -245,14 +246,40 @@
 		Sinon faut regarder dans le code, y en a plein less\dist\lessc-rhino-1.7.0.js, lignes 200 à 350.
 		Mais on sait pas à quoi elles s'appliquent (parser, renderer etc).
 		-->
+		<p>
 		Compiles and minifies <a href="http://lesscss.org/">Less</a> style sheets. All blobs are compiled.<br>
 		<span class="property">options</span> is an optional configuration object.
 		Example <code data-language="javascript">{ compress: false }</code><br>
 		If an error is found, the Queue stops and the error is displayed.
+		</p>
 
 		  
 		  
-  		<h4 id="s3()" class="code">.s3()</h4>
+  		<h4 id="s3()" class="code">.s3(config)</h4>
+		<!-- task type: slice -->
+		<p>
+			Deploy files to Amazon S3.
+			<span class="property">config</span> is an object with the following properties :
+		</p>
+		<dl class="arguments">
+			<dt>name</dt><dd>Name of the file to upload to S3</dd>
+			<dt>client.key</dt><dd>S3 API key</dd>
+			<dt>client.secret</dt><dd>S3 secret key</dd>
+			<dt>client.bucket</dt><dd>S3 bucket</dd>
+		</dl>
+		<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+    .read('src/app.js')
+    .jsminify()
+    .s3({
+        name: 'app.min.js',
+        client: {
+            key: '&lt;my API key&gt;',
+            secret: '&lt;my secret key&gt;',
+            bucket: 'my-bucket'
+        }
+    })
+    .run();</code>
+
 
 	  </section>
 
