@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <link rel="stylesheet" href="stylesheets/javascript.css">
     <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -34,6 +34,7 @@
 			<li><a href=".">Getting started</a></li>
 			<li><a href="core-tasks">Core tasks</a></li>
 			<li><a href="gear-lib-tasks">Gear-lib tasks</a></li>
+            <li><a href="gear-util">gear.Util</a></li>
 		</ul>
       </header>
 
@@ -90,6 +91,10 @@
 			The <span class="property">result</span> property can be a <span class="keyword">Buffer</span> or a <span class="keyword">String</span>.<br>
 			</dd>
 		</dl>
+
+        <h3>Utilities</h3>
+        <p>Gear also provides some useful <a href="gear-util">utility methods</a>.</p>
+    var package = gear.Util.readJSON('package.json');
       </section>
 
       <footer>

@@ -234,6 +234,19 @@ code {
 code.block {
   display: block;
   padding: 4px 12px;
+  position: relative;
+}
+
+code[data-file]::after {
+    content: attr(data-file);
+    display: block;
+    position: absolute;
+    right: 1px;
+    top: 1px;    
+    background-color: #cccccc;
+    border: 1px solid #aaaaaa;
+    border-top-right-radius: 4px;
+    padding: 0.1em 0.3em;
 }
 
 /* Tables */
