@@ -57,11 +57,13 @@
 			<div class="col-2">
 				<p>In command line mode, just type :</p>
 				<code class="block p">&gt; gear</code>
-				<p>and gear looks for the <code>Gearfile</code> in the current directory and executes it.</p>
+				<p>and gear looks for a file named <code>Gearfile</code> or <code>Gearfile.js</code> in the current directory or the first
+                    up the directory tree and executes it.</p>
 			</div>
 			<div class="col-2">
-				<code>Gearfile</code> example :
-				<code class="block" data-language="javascript">new gear.Queue({ registry: 'gear-lib' })
+				Example :
+				<code class="block" data-language="javascript" data-file="Gearfile.js">
+new gear.Queue({ registry: 'gear-lib' })
         .read('src/myproject.js')
         .jsminify()
         .write('build/myproject.min.js')
